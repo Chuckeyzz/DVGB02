@@ -1,3 +1,6 @@
+#include <stdbool.h>
+#include <string.h>
+
 #define A 0
 #define B 1
 #define TIMEOUT 10.0
