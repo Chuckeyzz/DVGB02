@@ -1,7 +1,5 @@
 #include "node.h"
 
-void sendpkt (struct distance_table *table, int node);
-
 void rtinit(struct distance_table *table, int node) {
 	// Tables are already initialized
 	sendpkt(table, node);
@@ -27,6 +25,7 @@ void rtupdate(struct distance_table *table, int node, struct rtpkt *pkt) {
 			}
 		}
 	}
+	//actually update distance table
 	for (int i = 0; i < 4; i++){
 			for (int j = 0; j < 4; j++){
 				if(updates->costs[i][j] != table->costs[i][j]){
@@ -48,6 +47,7 @@ void sendpkt(struct distance_table *table,int node){
 	struct rtpkt distpkt;			//create pkt
 	distpkt.sourceid = source;							//set sourceID
 	//construct mincost & destinationID for pkt to be sent to neighbours
+	
 	for(int i = 0; i < 4; i++){
 		if(is_neighbor(source, i)){
 			printf("Setting mincost[%d] = table->costs[%d][%d] = %d\n", i, source, i, table->costs[source][i]);
